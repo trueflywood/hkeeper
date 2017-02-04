@@ -1,4 +1,6 @@
 {
-  "name": "House Keeper",
-  "app_id": "com.flywood.hkeeper"
+  "name": "hkeeper2",
+  "app_id": "",
+  "v2": true,
+  "typescript": true
 }
