@@ -4,6 +4,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
+import {Main} from "../pages/main/main.component";
 
 
 @Component({
@@ -21,8 +22,12 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Page One', component: Page1 },
-      { title: 'Page Two', component: Page2 }
+      { title: 'Главная', component: Main },
+     // { title: 'Магазины', component: Shops },
+     //  { title: 'Плановые покупки', component: PlannedPurchase },
+      { title: 'Обратная связь', component: Page2 },
+      { title: 'О программе', component: Page2 },
+      { title: 'Тест 2', component: Page2 }
     ];
 
   }
