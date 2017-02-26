@@ -37,7 +37,11 @@
     "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
-    "cordova-plugin-device"
+    "cordova-plugin-device",
+    {
+      "locator": "add_res/scandit-barcodescanner-community-phonegap_5.1.0",
+      "id": "com.mirasense.scanditsdk.plugin"
+    }
   ],
   "cordovaPlatforms": [],
   "description": "hkeeper2: An Ionic project"
