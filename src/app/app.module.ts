@@ -1,10 +1,12 @@
-import {NgModule, ErrorHandler} from '@angular/core';
-import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
-import {MyApp} from './app.component';
-import {Page1} from '../pages/page1/page1';
-import {Page2} from '../pages/page2/page2';
-import {Main} from "../pages/main/main.component";
-import {Product} from "../pages/product/product.component";
+import {NgModule, ErrorHandler}                     from '@angular/core';
+import {IonicApp, IonicModule, IonicErrorHandler}   from 'ionic-angular';
+import {MyApp}                                      from './app.component';
+import {Page1}                                      from '../pages/page1/page1';
+import {Page2}                                      from '../pages/page2/page2';
+import {Main}                                       from '../pages/main/main.component';
+import {ProductComponent}                           from '../pages/product/product.component';
+import {Shops}                                      from '../pages/shops/shops.component';
+import {BackendService}                             from '../services/backend';
 
 @NgModule({
     declarations: [
@@ -12,7 +14,8 @@ import {Product} from "../pages/product/product.component";
         Page1,
         Page2,
         Main,
-        Product
+        Shops,
+        ProductComponent
     ],
     imports: [
         IonicModule.forRoot(MyApp)
@@ -23,9 +26,10 @@ import {Product} from "../pages/product/product.component";
         Page1,
         Page2,
         Main,
-        Product
+        Shops,
+        ProductComponent
     ],
-    providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+    providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, BackendService]
 })
 export class AppModule {
 }
