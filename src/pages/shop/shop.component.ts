@@ -6,12 +6,11 @@ import {Component}          from '@angular/core';
 import {NavController,
     Platform,
     NavParams}              from 'ionic-angular';
-import {Shop}               from '../shop/shop.component';
 
 @Component({
-    templateUrl: 'shops.html'
+    templateUrl: 'shop.html'
 })
-export class Shops {
+export class Shop {
     constructor(public navCtrl: NavController, public platform: Platform, public navParams: NavParams) {
         console.log('constructor Shops');
         this.platform.ready().then(() => {
@@ -20,9 +19,5 @@ export class Shops {
 
             }
         });
-    }
-
-    openShop(): void {
-        this.navCtrl.push(Shop);
     }
 }

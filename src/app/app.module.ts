@@ -7,6 +7,7 @@ import {Main}                                       from '../pages/main/main.com
 import {ProductComponent}                           from '../pages/product/product.component';
 import {Shops}                                      from '../pages/shops/shops.component';
 import {BackendService}                             from '../services/backend';
+import {Shop} from "../pages/shop/shop.component";
 
 @NgModule({
     declarations: [
@@ -15,7 +16,8 @@ import {BackendService}                             from '../services/backend';
         Page2,
         Main,
         Shops,
-        ProductComponent
+        ProductComponent,
+        Shop
     ],
     imports: [
         IonicModule.forRoot(MyApp)
@@ -27,7 +29,8 @@ import {BackendService}                             from '../services/backend';
         Page2,
         Main,
         Shops,
-        ProductComponent
+        ProductComponent,
+        Shop
     ],
     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, BackendService]
 })
