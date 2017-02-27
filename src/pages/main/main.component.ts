@@ -1,12 +1,12 @@
 /**
  * Created by flywood on 04.02.17.
  */
-import { Component } from '@angular/core';
+import { Component }                from '@angular/core';
 
-import { NavController, Platform } from 'ionic-angular';
+import { NavController, Platform }  from 'ionic-angular';
+import {Product}                    from "../product/product.component";
 
 @Component({
-    selector: 'page-main',
     templateUrl: 'main.html'
 })
 export class Main {
@@ -27,6 +27,22 @@ export class Main {
                 //this.scanSettings.setSymbologyEnabled(Scandit.Barcode.Symbology.UPC12, true);
                 //this.scanSettings.setSymbologyEnabled(Scandit.Barcode.Symbology.EAN8, true);
                 this.scanPicker = new Scandit.BarcodePicker(this.scanSettings);
+
+                console.log('start Geo');
+                console.log('start Geo3');
+                if (navigator.geolocation) {
+                    var options = {
+                        enableHighAccuracy: true
+                    };
+                    console.log('start Geo5');
+                    navigator.geolocation.getCurrentPosition(position=> {
+                        console.info('using navigator');
+                        console.info(position.coords.latitude);
+                        console.info(position.coords.longitude);
+                    }, error => {
+                        console.log(error);
+                    }, options);
+                }
             }
         });
     }
@@ -43,6 +59,13 @@ export class Main {
             }, null, (error: any) => {
                 console.log("Error: ");
                 console.log(error);
+            });
+
+        } else {
+            this.navCtrl.push(Product, {
+                product: {
+                    cod: "4005808837359"
+                }
             });
         }
 
