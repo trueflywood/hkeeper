@@ -1,5 +1,7 @@
 # README #
 
+![Alt text](https://codeship.com/projects/8ef89d50-e0c1-0134-a519-623fd38eaab5/status?branch=master
+
 This README would normally document whatever steps are necessary to get your application up and running.
 
 ### What is this repository for? ###
