@@ -1,8 +1,7 @@
 # README #
 
-
-![Alt text](https://codeship.com/projects/8ef89d50-e0c1-0134-a519-623fd38eaab5/status?branch=master)
-
+[![Dependency Status](https://david-dm.org/trueflywood/hkeeper/status.svg)](https://david-dm.org/trueflywood/hkeeper)
+[![devDependency Status](https://david-dm.org/trueflywood/hkeeper/dev-status.svg)](https://david-dm.org/trueflywood/hkeeper#info=devDependencies)
 
 This README would normally document whatever steps are necessary to get your application up and running.
 
