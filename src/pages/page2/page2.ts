@@ -35,4 +35,7 @@ export class Page2 {
       item: item
     });
   }
+  goHome(): void {
+      this.navCtrl.popToRoot();
+  }
 }

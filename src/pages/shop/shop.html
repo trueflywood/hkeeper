@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Магазин</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding text-center class="shop">
+    <div class="input">
+        <ion-item>
+            <ion-input placeholder="Назване магазина" type="text"></ion-input>
+        </ion-item>
+    </div>
+    <div class="input">
+        <ion-item>
+            <ion-input placeholder="Адрес" type="text"></ion-input>
+        </ion-item>
+    </div>
+    <div class="input">
+        <button ion-button block (click)="showMap()">Указать координаты на карте</button>
+    </div>
+    <div class="input">
+        <button ion-button block (click)="getCoords()">Использовать текущие координаты</button>
+    </div>
+</ion-content>
