@@ -60,4 +60,9 @@ export class BackendService {
             .catch(this.handleError);
     }
 
+    getProductName(cod: string): Observable<any> {
+        let url = 'card/name/' + cod;
+        return this.getRequest(url);
+    }
+
 }

@@ -11,7 +11,7 @@
     <div class="image"></div>
     <div class="input">
         <ion-item>
-            <ion-input placeholder="ВВедите назване товара" type="text"></ion-input>
+            <ion-input placeholder="ВВедите назване товара" type="text" [(ngModel)]="product.productName"></ion-input>
         </ion-item>
     </div>
     <div class="input">
@@ -35,10 +35,10 @@
         </ion-item>
     </div>
     <div class="input">
-        <button ion-button block (click)="checkPrice()">Сравнить цену</button>
+        <button ion-button block (click)="checkPrice()" [disabled]="!(price && productName) ? true : null">Сравнить цену</button>
     </div>
     <div class="input">
-        <button ion-button block (click)="addToReceipt()">Добавить в чек</button>
+        <button ion-button block (click)="addToReceipt()" [disabled]="!(price && productName) ? true : null">Добавить в чек</button>
     </div>
 
 </ion-content>

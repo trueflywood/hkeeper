@@ -8,7 +8,9 @@ import {NavController,
     LoadingController}          from 'ionic-angular';
 import {ProductComponent}       from '../product/product.component';
 import {SCANDIT_KEY}            from '../../app/config';
-import {ICoords}                from '../../interfaces/product';
+import {ICoords, Product}                from '../../interfaces/product';
+import {Geolocation, Toast}          from 'ionic-native';
+import {BackendService} from "../../services/backend";
 
 @Component({
     templateUrl: 'main.html'
@@ -20,11 +22,9 @@ export class Main {
     public type: string;
     coords: ICoords;
 
+    constructor(public navCtrl: NavController, public platform: Platform, public backend: BackendService, public loadingCtrl: LoadingController){
 
-    constructor(public navCtrl: NavController, public platform: Platform, public loadingCtrl: LoadingController){
-        console.log('constructor');
         this.platform.ready().then(() => {
-            console.log((<any> window));
             if ((<any> window).cordova) {
                 Scandit.License.setAppKey(SCANDIT_KEY);
                 this.scanSettings = new Scandit.ScanSettings();
@@ -35,6 +35,8 @@ export class Main {
 
 
                 if (navigator.geolocation) {
+
+
                     let loading = this.loadingCtrl.create({
                         content: 'Получение координат...'
                     });
@@ -42,6 +44,14 @@ export class Main {
                     let options = {
                         enableHighAccuracy: true
                     };
+
+                    Geolocation.getCurrentPosition().then((resp) => {
+                        // resp.coords.latitude
+                        // resp.coords.longitude
+                    }).catch((error) => {
+                        console.log('Error getting location', error);
+                    });
+
                     console.log('start Geo5');
                     navigator.geolocation.getCurrentPosition(position=> {
                         console.info('using navigator');
@@ -64,25 +74,55 @@ export class Main {
             this.scanPicker.show((res: any) => {
                 this.type = res.newlyRecognizedCodes[0].symbology;
                 this.cod = res.newlyRecognizedCodes[0].data;
-                this.navCtrl.push(ProductComponent, {
-                    product: {
-                        cod: this.cod,
-                        coords: this.coords
-                    }
+
+                let product = new Product({
+                    cod: this.cod,
+                    coords: this.coords
                 });
+                this.getProductName(product);
             }, null, (error: any) => {
                 console.log("Error: ");
                 console.log(error);
             });
 
         } else {
-            this.navCtrl.push(ProductComponent, {
-                product: {
-                    cod: "4005808837359",
-                    coords: this.coords
-                }
+            let product: Product = new Product({
+                cod: "4005808837359",
+                coords: this.coords
             });
+            this.getProductName(product);
         }
+    }
+
+    getProductName(product: Product): void {
+        let loading = this.loadingCtrl.create({
+            content: 'Получение названия товара... ',
+            dismissOnPageChange: true
+        });
+        loading.present();
+
+        this.backend.getProductName(product.cod).subscribe((data) => {
+            console.log(data);
+            console.log(product);
+            if (data.status === 200) {
+                product.productName = data.names[0];
+                this.navCtrl.push(ProductComponent, {product: product});
+            } else {
+                console.log('show toast');
+                Toast.show("Название товара не найдено", '10000', 'center').subscribe(
+                    toast => {
+                        this.navCtrl.push(ProductComponent, {product: product});
+                    }
+                );
+            }
+        });
+    }
+
+    showCheck(): void {
+
+    }
+
+    resetCheck(): void {
 
     }
 }
