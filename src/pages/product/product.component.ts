@@ -11,7 +11,7 @@ import {
 }                           from 'ionic-angular';
 import {BackendService}     from '../../services/backend';
 import {Product}            from '../../interfaces/product';
-
+import {DataBase}           from "../../services/database";
 
 @Component({
     templateUrl: 'product.html'
@@ -20,7 +20,7 @@ export class ProductComponent {
     product: Product;
     price: number;
 
-    constructor(public navCtrl: NavController, public platform: Platform, public navParams: NavParams, public backend: BackendService) {
+    constructor(public navCtrl: NavController, public platform: Platform, public navParams: NavParams, public backend: BackendService, public database: DataBase) {
         console.log('constructor Product');
         // If we navigated to this page, we will have an item available as a nav param
         this.product = new Product(navParams.get('product'));
@@ -44,10 +44,16 @@ export class ProductComponent {
     }
 
     addToReceipt(): void {
-
-
+        let res2 = this.database.addProduct(this.product);
+        console.log('res2');
+        console.log(res2);
+        res2.then((rrr) => {
+            console.log('rrr');
+            console.log(rrr);
+        },(err) => {
+            console.log('err');
+            console.log(err);
+        })
     }
-
-
 }
 
