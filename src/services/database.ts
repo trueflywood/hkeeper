@@ -37,7 +37,7 @@ export class DataBase {
     }
 
     addProduct(product: Product): Promise<any> {
-        let sql = 'INSERT INTO check_table(cod, name, price) VALUES("' +product.cod + '", "' + product.productName + '", ' + product.price + ');'
+        let sql = 'INSERT INTO check_table(cod, name, price) VALUES("' +product.cod + '", "' + product.productName + '", ' + product.price + ');';
         return this.base.executeSql(sql, {});
         /*return this.base.transaction((tr) =>{
             console.log('tr');
@@ -47,8 +47,10 @@ export class DataBase {
         });*/
     }
 
-
-
+    selectCheckList(): Promise<any> {
+        let sql = 'SELECT * FROM check_table';
+        return this.base.executeSql(sql, {});
+    }
 }
 
 

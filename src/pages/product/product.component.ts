@@ -53,7 +53,15 @@ export class ProductComponent {
         },(err) => {
             console.log('err');
             console.log(err);
+        });
+
+        this.database.selectCheckList().then((list)=>{
+            console.log('list');
+            console.log(list);
+            console.log(list.rows.item(0));
+
         })
+
     }
 }
 

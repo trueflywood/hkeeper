@@ -1,6 +1,6 @@
 {
   "name": "hkeper",
-  "author": "Ionic Framework",
+  "author": "Aleksey Kompanets",
   "homepage": "http://ionicframework.com/",
   "private": true,
   "scripts": {
@@ -44,5 +44,5 @@
     }
   ],
   "cordovaPlatforms": [],
-  "description": "hkeeper2: An Ionic project"
+  "description": "hkeeper: An Ionic project"
 }
