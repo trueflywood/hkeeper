@@ -12,6 +12,7 @@ import {
 import {BackendService}     from '../../services/backend';
 import {Product}            from '../../interfaces/product';
 import {DataBase}           from "../../services/database";
+import {ReceiptPage} from "../receipt/receipt";
 
 @Component({
     templateUrl: 'product.html'
@@ -19,7 +20,8 @@ import {DataBase}           from "../../services/database";
 export class ProductComponent {
     product: Product;
     price: number;
-
+    checkPriceFlag: boolean =false;
+    addToReceiptFlag: boolean = false;
     constructor(public navCtrl: NavController, public platform: Platform, public navParams: NavParams, public backend: BackendService, public database: DataBase) {
         console.log('constructor Product');
         // If we navigated to this page, we will have an item available as a nav param
@@ -43,13 +45,11 @@ export class ProductComponent {
 
     }
 
-    addToReceipt(): void {
+    addToReceipt(form): void {
+
         let res2 = this.database.addProduct(this.product);
-        console.log('res2');
-        console.log(res2);
         res2.then((rrr) => {
-            console.log('rrr');
-            console.log(rrr);
+            this.navCtrl.push(ReceiptPage, {product: form});
         },(err) => {
             console.log('err');
             console.log(err);
@@ -58,8 +58,6 @@ export class ProductComponent {
         this.database.selectCheckList().then((list)=>{
             console.log('list');
             console.log(list);
-            console.log(list.rows.item(0));
-
         })
 
     }
