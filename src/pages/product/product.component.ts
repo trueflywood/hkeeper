@@ -7,10 +7,10 @@ import {
     NavController,
     Platform,
     NavParams,
-    LoadingController
+    LoadingController, AlertController
 }                           from 'ionic-angular';
 import {BackendService}     from '../../services/backend';
-import {Product}            from '../../interfaces/product';
+import {Product, ReceiptProduct}            from '../../interfaces/product';
 import {DataBase}           from "../../services/database";
 import {ReceiptPage} from "../receipt/receipt";
 
@@ -18,16 +18,23 @@ import {ReceiptPage} from "../receipt/receipt";
     templateUrl: 'product.html'
 })
 export class ProductComponent {
-    product: Product;
+    product: ReceiptProduct;
     price: number;
     checkPriceFlag: boolean =false;
     addToReceiptFlag: boolean = false;
-    constructor(public navCtrl: NavController, public platform: Platform, public navParams: NavParams, public backend: BackendService, public database: DataBase) {
+    constructor(
+        public navCtrl: NavController,
+        public platform: Platform,
+        public navParams: NavParams,
+        public backend: BackendService,
+        public database: DataBase,
+        public alertCtrl: AlertController
+    ) {
         console.log('constructor Product');
         // If we navigated to this page, we will have an item available as a nav param
-        this.product = new Product(navParams.get('product'));
+        this.product = new ReceiptProduct(navParams.get('product'));
 
-
+        console.log(this.product);
 
 
         /*this.platform.ready().then(() => {
@@ -45,11 +52,11 @@ export class ProductComponent {
 
     }
 
-    addToReceipt(form): void {
+    addToReceipt(): void {
 
         let res2 = this.database.addProduct(this.product);
         res2.then((rrr) => {
-            this.navCtrl.push(ReceiptPage, {product: form});
+            this.navCtrl.push(ReceiptPage);
         },(err) => {
             console.log('err');
             console.log(err);
@@ -61,5 +68,45 @@ export class ProductComponent {
         })
 
     }
+
+    showPrompt() {
+        let prompt = this.alertCtrl.create({
+            title: 'Количество',
+            message: "Ведите количество товара ",
+            cssClass: 'count-inputs',
+            inputs: [
+                {
+                    name: 'count',
+                    placeholder: 'Кол-во',
+                    type: 'number',
+                    value: this.product.count.toString()
+                }
+            ],
+            buttons: [
+                {
+                    text: 'Отмена',
+                    handler: data => {
+                        console.log('Cancel clicked');
+                    }
+                }, {
+                    text: 'Сохранить',
+                    handler: (data) => {
+                        console.log('data');
+                        console.log(data);
+                        console.log('this.product');
+                        console.log(this.product);
+                        this.product.count = data.count;
+                        console.log(this.product);
+                        this.addToReceipt();
+
+                    }
+                }
+            ]
+        });
+        prompt.present();
+    }
+
+
+
 }
 

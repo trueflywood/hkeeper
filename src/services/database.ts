@@ -3,7 +3,7 @@
  */
 import { SQLite }           from 'ionic-native';
 import {Injectable}         from "@angular/core";
-import {Product}            from "../interfaces/product";
+import {Product, ReceiptProduct}            from "../interfaces/product";
 import {Platform}           from "ionic-angular";
 
 @Injectable()
@@ -28,7 +28,7 @@ export class DataBase {
                 name: 'data.db',
                 location: 'default' // the location field is required
             }).then(() => {
-                this.base.executeSql('CREATE TABLE IF NOT EXISTS receipt_table(id INTEGER PRIMARY KEY, cod varchar(13), productName TEXT, price NUMBER)', {})
+                this.base.executeSql('CREATE TABLE IF NOT EXISTS receipt_table(id INTEGER PRIMARY KEY, cod varchar(13), productName TEXT, price NUMBER, prod_count NUMBER)', {})
                     .then(() => {
 
                     }, (err) => {
@@ -40,12 +40,12 @@ export class DataBase {
         }
     }
 
-    addProduct(product: Product): Promise<any> {
-        let sql = 'INSERT INTO receipt_table(cod, productName, price) VALUES(?, ?, ?);';
+    addProduct(product: ReceiptProduct): Promise<any> {
+        let sql = 'INSERT INTO receipt_table(cod, productName, price, prod_count) VALUES(?, ?, ?, ?);';
         console.log('sql');
         console.log(sql);
 
-        return this.base.executeSql(sql, [product.cod, product.productName, product.price]);
+        return this.base.executeSql(sql, [product.cod, product.productName, product.price, product.count]);
         /*return this.base.transaction((tr) =>{
             console.log('tr');
             console.log(tr);
@@ -60,7 +60,7 @@ export class DataBase {
     }
 
     getSumReceipt(): Promise<any> {
-        let sql = 'SELECT sum(price) as sum_price FROM receipt_table';
+        let sql = 'SELECT sum(price * prod_count) as sum_price FROM receipt_table';
         return this.base.executeSql(sql, {});
     }
 

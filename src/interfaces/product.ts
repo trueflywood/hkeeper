@@ -30,3 +30,10 @@ export class Product implements IProduct {
         this.price = obj.price || '';
     }
 }
+export class ReceiptProduct extends Product {
+    count: number = 1;
+    constructor(obj?) {
+        super(obj);
+        this.count = obj.count || 1;
+    }
+}

@@ -19,7 +19,9 @@
                         <ion-col width-75 class="product-name">
                             {{product.productName}}
                         </ion-col>
-                        <ion-col width-25 text-right>
+                        <ion-col width-10 text-right>
+                            {{product.count}}
+                            X
                             {{product.price.toFixed(2)}}
                         </ion-col>
                     </ion-row>

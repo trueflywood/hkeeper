@@ -18,7 +18,7 @@
         <div class="input">
             <ion-item>
                 <ion-label>Магазин</ion-label>
-                <ion-select [(ngModel)]="shops" name="shop" >
+                <ion-select [(ngModel)]="shops" name="shop">
                     <ion-option value="f">Female</ion-option>
                     <ion-option value="m">Male</ion-option>
                 </ion-select>
@@ -36,10 +36,10 @@
             </ion-item>
         </div>
         <div class="input">
-            <button ion-button block (click)="checkPrice(productForm)">Сравнить цену </button>
+            <button ion-button block (click)="checkPrice()">Сравнить цену </button>
         </div>
         <div class="input">
-            <button ion-button block (click)="addToReceipt(productForm)">Добавить в чек </button>
+            <button ion-button block (click)="showPrompt()">Добавить в чек </button>
         </div>
     </form>
 
