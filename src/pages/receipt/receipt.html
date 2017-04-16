@@ -9,9 +9,9 @@
         <ion-title>Чек</ion-title>
     </ion-navbar>
 </ion-header>
-<ion-content padding *ngIf="products">
+<ion-content padding>
 
-    <ion-list>
+    <ion-list *ngIf="products.length > 0">
         <ion-item-sliding *ngFor="let product of products">
             <ion-item>
                 <ion-grid>
@@ -20,7 +20,7 @@
                             {{product.productName}}
                         </ion-col>
                         <ion-col width-10 text-right>
-                            {{product.count}}
+                            {{product.prod_count_sum}}
                             X
                             {{product.price.toFixed(2)}}
                         </ion-col>
@@ -28,19 +28,20 @@
                 </ion-grid>
             </ion-item>
             <ion-item-options side="right">
-                <button ion-button>Unread</button>
+                <button ion-button color="danger" (click)="onTrash(product.cod, product.price.toFixed(2))"><ion-icon name="trash"></ion-icon></button>
+                <button ion-button color="secondary" (click)="onEdit(product.cod, product.price.toFixed(2))"><i class="fa fa-pencil" aria-hidden="true"></i></button>
             </ion-item-options>
         </ion-item-sliding>
     </ion-list>
 </ion-content>
 <ion-footer>
     <ion-toolbar>
-        <ion-title *ngIf="sumReceipt[0]">
+        <ion-title *ngIf="sumReceipt && sumReceipt[0] && sumReceipt[0].sum_price">
             <ion-row>
                 <ion-col width-75>
                     Сумма чека:
                 </ion-col>
-                <ion-col width-25 text-right>
+                <ion-col width-25 text-right >
                     {{sumReceipt[0].sum_price.toFixed(2)}}
                 </ion-col>
             </ion-row>

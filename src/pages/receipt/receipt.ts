@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import {Product} from "../../interfaces/product";
+import {ReceiptProduct, ReceiptProductSum} from "../../interfaces/product";
 import {DataBase} from "../../services/database";
 
 /*
@@ -14,21 +14,11 @@ import {DataBase} from "../../services/database";
   templateUrl: 'receipt.html'
 })
 export class ReceiptPage {
-    products : Product[] = [];
-    sumReceipt: number[] = [];
+    products : ReceiptProductSum[] = [];
+    sumReceipt: any[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public database: DataBase) {
-      if ((<any> window).cordova) {
-          this.database.selectCheckList().then((list) => {
-              this.products = this.database.getRowsType(list, Product);
-          });
-          this.database.getSumReceipt().then((list) => {
-              this.sumReceipt = this.database.getRowsSimple<number>(list);
-              console.log('this.sumReceipt');
-              console.log(this.sumReceipt);
-          });
-
-      }
+      this.getPriceList();
   }
   getData():void {
 
@@ -38,4 +28,18 @@ export class ReceiptPage {
     console.log('ionViewDidLoad ReceiptPage');
   }
 
+    onTrash(cod: string, price: number): void {
+        this.database.delReceiptRows(cod, price).then(() => {
+            this.getPriceList();
+        });
+    }
+
+    getPriceList(): void {
+        this.database.selectCheckList().then((list) => {
+            this.products = this.database.getRowsType(list, ReceiptProductSum);
+        });
+        this.database.getSumReceipt().then((list) => {
+            this.sumReceipt = this.database.getRowsSimple<any>(list);
+        });
+    }
 }

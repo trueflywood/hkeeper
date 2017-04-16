@@ -79,7 +79,7 @@ export class ProductComponent {
                     name: 'count',
                     placeholder: 'Кол-во',
                     type: 'number',
-                    value: this.product.count.toString()
+                    value: this.product.prod_count.toString()
                 }
             ],
             buttons: [
@@ -95,7 +95,7 @@ export class ProductComponent {
                         console.log(data);
                         console.log('this.product');
                         console.log(this.product);
-                        this.product.count = data.count;
+                        this.product.prod_count = data.count;
                         console.log(this.product);
                         this.addToReceipt();
 

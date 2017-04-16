@@ -31,9 +31,18 @@ export class Product implements IProduct {
     }
 }
 export class ReceiptProduct extends Product {
-    count: number = 1;
+    prod_count: number = 1;
+
     constructor(obj?) {
         super(obj);
-        this.count = obj.count || 1;
+        this.prod_count = obj.prod_count || 1;
+    }
+}
+
+export class ReceiptProductSum extends ReceiptProduct {
+    prod_count_sum: number = 1;
+    constructor(obj?) {
+        super(obj);
+        this.prod_count_sum = obj.prod_count_sum || 1;
     }
 }

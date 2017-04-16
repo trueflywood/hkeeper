@@ -10,6 +10,7 @@ import {BackendService}                             from '../services/backend';
 import {Shop}                                       from "../pages/shop/shop.component";
 import {DataBase}                                   from "../services/database";
 import {ReceiptPage} from "../pages/receipt/receipt";
+import {SQLite}                                     from '@ionic-native/sqlite';
 
 @NgModule({
     declarations: [
@@ -36,7 +37,12 @@ import {ReceiptPage} from "../pages/receipt/receipt";
         Shop,
         ReceiptPage
     ],
-    providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, BackendService, DataBase]
+    providers: [
+        {provide: ErrorHandler, useClass: IonicErrorHandler},
+        BackendService,
+        DataBase,
+        SQLite
+    ]
 })
 export class AppModule {
 }
