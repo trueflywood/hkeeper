@@ -11,6 +11,8 @@ import {SCANDIT_KEY}            from '../../app/config';
 import {ICoords, Product}                from '../../interfaces/product';
 import {Geolocation, Toast}          from 'ionic-native';
 import {BackendService} from "../../services/backend";
+import {ReceiptPage} from "../receipt/receipt";
+import {DataBase} from "../../services/database";
 
 @Component({
     templateUrl: 'main.html'
@@ -22,7 +24,13 @@ export class Main {
     public type: string;
     coords: ICoords;
 
-    constructor(public navCtrl: NavController, public platform: Platform, public backend: BackendService, public loadingCtrl: LoadingController){
+    constructor(
+        public navCtrl: NavController,
+        public platform: Platform,
+        public backend: BackendService,
+        public loadingCtrl: LoadingController,
+        public database: DataBase
+    ){
 
         this.platform.ready().then(() => {
             if ((<any> window).cordova) {
@@ -119,10 +127,19 @@ export class Main {
     }
 
     showCheck(): void {
-
+        this.navCtrl.push(ReceiptPage);
     }
 
     resetCheck(): void {
+        this.database.clearReceipt().then((list)=>{
+            console.log('list');
+            console.log(list);
+            Toast.show("Чек очищен", '5000', 'center').subscribe(
+                toast => {
+
+                }
+            );
+        })
 
     }
 }
