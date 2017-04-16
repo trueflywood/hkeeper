@@ -91,12 +91,7 @@ export class ProductComponent {
                 }, {
                     text: 'Сохранить',
                     handler: (data) => {
-                        console.log('data');
-                        console.log(data);
-                        console.log('this.product');
-                        console.log(this.product);
                         this.product.prod_count = data.count;
-                        console.log(this.product);
                         this.addToReceipt();
 
                     }

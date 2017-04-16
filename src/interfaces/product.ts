@@ -15,19 +15,19 @@ export interface IProduct {
     cod: string;
     coords: ICoords;
     productName?: string;
-    price?: string;
+    price?: number;
 }
 
 export class Product implements IProduct {
     cod: string;
     coords: ICoords;
     productName: string;
-    price: string;
+    price: number;
     constructor(obj? : IProduct) {
         this.cod = obj.cod || '';
         this.coords = obj.coords || {latitude: 54.101853, longitude: 37.579653};
         this.productName = obj.productName || '';
-        this.price = obj.price || '';
+        this.price = obj.price || 0;
     }
 }
 export class ReceiptProduct extends Product {

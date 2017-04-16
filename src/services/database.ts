@@ -136,6 +136,10 @@ export class DataBase {
         return this.executeSql(sql, [code, price]);
     }
 
+    getReceiptProduct(cod: string, price: number): Promise<any> {
+        let sql = 'SELECT *, SUM(prod_count) as prod_count_sum FROM receipt_table WHERE cod = ? and price = ? GROUP BY cod, price';
+        return this.executeSql(sql, [cod, price]);
+    }
 }
 
 
