@@ -1,6 +1,6 @@
 {
   "name": "hkeper",
-  "author": "Ionic Framework",
+  "author": "Aleksey Kompanets",
   "homepage": "http://ionicframework.com/",
   "private": true,
   "scripts": {
@@ -19,6 +19,7 @@
     "@angular/platform-browser": "2.2.1",
     "@angular/platform-browser-dynamic": "2.2.1",
     "@angular/platform-server": "2.2.1",
+    "@ionic-native/sqlite": "^3.4.4",
     "@ionic/storage": "1.1.7",
     "ionic-angular": "2.0.0",
     "ionic-native": "^2.8.0",
@@ -44,5 +45,5 @@
     }
   ],
   "cordovaPlatforms": [],
-  "description": "hkeeper2: An Ionic project"
+  "description": "hkeeper: An Ionic project"
 }

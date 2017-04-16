@@ -7,7 +7,10 @@ import {Main}                                       from '../pages/main/main.com
 import {ProductComponent}                           from '../pages/product/product.component';
 import {Shops}                                      from '../pages/shops/shops.component';
 import {BackendService}                             from '../services/backend';
-import {Shop} from "../pages/shop/shop.component";
+import {Shop}                                       from "../pages/shop/shop.component";
+import {DataBase}                                   from "../services/database";
+import {ReceiptPage} from "../pages/receipt/receipt";
+import {SQLite}                                     from '@ionic-native/sqlite';
 
 @NgModule({
     declarations: [
@@ -17,7 +20,8 @@ import {Shop} from "../pages/shop/shop.component";
         Main,
         Shops,
         ProductComponent,
-        Shop
+        Shop,
+        ReceiptPage
     ],
     imports: [
         IonicModule.forRoot(MyApp)
@@ -30,9 +34,15 @@ import {Shop} from "../pages/shop/shop.component";
         Main,
         Shops,
         ProductComponent,
-        Shop
+        Shop,
+        ReceiptPage
     ],
-    providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, BackendService]
+    providers: [
+        {provide: ErrorHandler, useClass: IonicErrorHandler},
+        BackendService,
+        DataBase,
+        SQLite
+    ]
 })
 export class AppModule {
 }
